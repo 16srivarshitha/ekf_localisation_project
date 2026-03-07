@@ -1,0 +1,9 @@
+version: '3.8'
+services:
+  ros2_ekf:
+    build: .
+    container_name: ekf_dev_container
+    volumes:
+      - ./src:/ros2_ws/src
+    command: tail -F /dev/null 
+    network_mode: host       

@@ -1,0 +1,72 @@
+# ROS 2 / Colcon build artifacts
+build/
+install/
+log/
+*.egg-info/
+__pycache__/
+*.py[cod]
+*.pyo
+*.pyd
+.colcon_ignore
+COLCON_IGNORE
+
+# Python
+*.pyc
+*.pyo
+*.pyd
+*.so
+*.egg
+dist/
+*.dist-info/
+.eggs/
+.mypy_cache/
+.pytest_cache/
+.ruff_cache/
+venv/
+.venv/
+env/
+.env/
+
+# Generated plots and animation frames
+# Keep final plots but ignore intermediate GIF frames
+analysis/plots/gif_frames/
+
+# If you want to exclude all generated plots too, uncomment:
+# analysis/plots/*.png
+# analysis/plots/*.gif
+
+# Data files — keep .npy files tracked (they are small and needed to run)
+# Comment out if you prefer to exclude them
+# data/**/*.npy
+
+# OS / Editor
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+Thumbs.db
+desktop.ini
+
+.idea/
+.vscode/
+*.swp
+*.swo
+*~
+*.orig
+
+# Docker
+.docker/
+docker-compose.override.yml
+
+# ROS 2 specific
+*.bag
+*.bag.active
+roscore.pid
+.catkin_workspace
+devel/
+
+# Compiled ROS messages / services
+msg/*.py
+srv/*.py
+action/*.py
