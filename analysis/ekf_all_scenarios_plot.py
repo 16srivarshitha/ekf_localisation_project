@@ -3,16 +3,14 @@ import sys
 import numpy as np
 import matplotlib.pyplot as plt
 
-# --- Path setup (works on any machine) ---
 SCRIPT_DIR = os.path.dirname(os.path.abspath(__file__))
 DATA_DIR   = os.path.join(SCRIPT_DIR, "..", "data")
 PLOTS_DIR  = os.path.join(SCRIPT_DIR, "plots")
 os.makedirs(PLOTS_DIR, exist_ok=True)
 
-# ekf.py lives in the same analysis/ folder
 from ekf import EKFLocalizer
 
-# --- Scenario definitions ---
+#  Scenario definitions 
 scenarios = {
     "scenario_1": {
         "label": "Scenario 1 (Low Noise)",
@@ -37,13 +35,13 @@ for folder, cfg in scenarios.items():
 
     print(f"Processing: {folder} — {cfg['label']}")
 
-    # --- Load data ---
+    #  Load data 
     gt        = np.load(os.path.join(DATA_DIR, folder, "ground_truth.npy"))
     odom      = np.load(os.path.join(DATA_DIR, folder, "odometry.npy"))
     landmarks = np.load(os.path.join(DATA_DIR, folder, "landmarks.npy"))
     obs       = np.load(os.path.join(DATA_DIR, folder, "observations.npy"))
 
-    # --- Run EKF ---
+    #  Run EKF 
     ekf = EKFLocalizer(
         initial_state         = np.array([0.0, 0.0, 0.0]),
         initial_covariance    = np.eye(3) * 0.1,
@@ -71,7 +69,7 @@ for folder, cfg in scenarios.items():
 
     ekf_path = np.array(ekf_path)
 
-    # --- Plot ---
+    #  Plot 
     plt.figure(figsize=(8, 8))
 
     plt.plot(odom[:, 0], odom[:, 1],

@@ -2,9 +2,9 @@ import numpy as np
 import matplotlib.pyplot as plt
 
 # Load data
-gt = np.load("ground_truth.npy")
-odom = np.load("odometry.npy")
-landmarks = np.load("landmarks.npy")
+gt = np.load("data/ground_truth.npy")
+odom = np.load("data/odometry.npy")
+landmarks = np.load("data/landmarks.npy")
 
 # Extract coordinates
 gt_x = gt[:,0]
