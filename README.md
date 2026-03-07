@@ -6,9 +6,21 @@ A from-scratch implementation of an **Extended Kalman Filter (EKF)** for 2D robo
 
 ## Demo
 
-![EKF Localization Animation](analysis/plots/ekf_localization.gif)
+<p align="center">
+  <img src="analysis/plots/ekf_localization1.gif" width="30%">
+  <img src="analysis/plots/ekf_localization2.gif" width="30%">
+  <img src="analysis/plots/ekf_localization3.gif" width="30%">
+</p>
 
-> **Green** = Ground Truth &nbsp;|&nbsp; **Red dashed** = Noisy Odometry &nbsp;|&nbsp; **Blue** = EKF Estimate &nbsp;|&nbsp; **Blue ellipse** = 2σ covariance
+<p align="center">
+  <b>Low Noise</b> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+  <b>Moderate Noise</b> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+  <b>High Noise</b>
+</p>
+
+<p align="center">
+  <i>Green = Ground Truth | Red dashed = Noisy Odometry | Blue = EKF Estimate | Blue ellipse = 2σ covariance</i>
+</p>
 
 ---
 

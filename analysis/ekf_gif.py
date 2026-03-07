@@ -18,10 +18,10 @@ os.makedirs(FRAMES_DIR, exist_ok=True)
 from ekf import EKFLocalizer
 
 #  Load base scenario data 
-gt        = np.load(os.path.join(DATA_DIR, "scenario_2", "ground_truth.npy"))
-odom      = np.load(os.path.join(DATA_DIR, "scenario_2", "odometry.npy"))
-landmarks = np.load(os.path.join(DATA_DIR, "scenario_2", "landmarks.npy"))
-obs       = np.load(os.path.join(DATA_DIR, "scenario_2", "observations.npy"))
+gt        = np.load(os.path.join(DATA_DIR, "scenario_1", "ground_truth.npy"))
+odom      = np.load(os.path.join(DATA_DIR, "scenario_1", "odometry.npy"))
+landmarks = np.load(os.path.join(DATA_DIR, "scenario_1", "landmarks.npy"))
+obs       = np.load(os.path.join(DATA_DIR, "scenario_1", "observations.npy"))
 
 DT = 0.1
 
