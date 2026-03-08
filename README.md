@@ -13,8 +13,8 @@ A from-scratch implementation of an **Extended Kalman Filter (EKF)** for 2D mobi
 </p>
 <p align="center">
   <b>Low Noise</b> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-  <b>Moderate Noise</b> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-  <b>High Noise</b>
+  <b>High Noise</b> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+  <b>Moderate Noise</b>
 </p>
 <p align="center">
   <i>Green = Ground Truth &nbsp;|&nbsp; Red dashed = Noisy Odometry &nbsp;|&nbsp; Blue = EKF Estimate &nbsp;|&nbsp; Blue ellipse = 2σ covariance</i>
