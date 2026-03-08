@@ -6,17 +6,24 @@ A from-scratch implementation of an **Extended Kalman Filter (EKF)** for 2D mobi
 
 ## Demo — Three Noise Scenarios
 
-<p align="center">
-  <img src="analysis/plots/ekf_localization1.gif" width="30%">
-  <img src="analysis/plots/ekf_localization2.gif" width="30%">
-  <img src="analysis/plots/ekf_localization3.gif" width="30%">
-</p>
-<p align="center">
-  <b>Low Noise</b> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-  <b>High Noise</b> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-  <b>Moderate Noise</b>
-</p>
-<p align="center">
+<table align="center">
+<tr>
+<td align="center">
+<img src="analysis/plots/ekf_localization1.gif" width="250"><br>
+<b>Low Noise</b>
+</td>
+
+<td align="center">
+<img src="analysis/plots/ekf_localization2.gif" width="250"><br>
+<b>High Noise</b>
+</td>
+
+<td align="center">
+<img src="analysis/plots/ekf_localization3.gif" width="250"><br>
+<b>Moderate Noise</b>
+</td>
+</tr>
+</table>
   <i>Green = Ground Truth &nbsp;|&nbsp; Red dashed = Noisy Odometry &nbsp;|&nbsp; Blue = EKF Estimate &nbsp;|&nbsp; Blue ellipse = 2σ covariance</i>
 </p>
 
