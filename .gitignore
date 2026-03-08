@@ -29,11 +29,10 @@ env/
 
 # Generated plots and animation frames
 # Keep final plots but ignore intermediate GIF frames
-analysis/plots/gif_frames/
-
-# If you want to exclude all generated plots too, uncomment:
-# analysis/plots/*.png
-# analysis/plots/*.gif
+# analysis/plots/gif_frames/
+# analysis/plots/gif_frames_scenario_1/
+# analysis/plots/gif_frames_scenario_2/
+# analysis/plots/gif_frames_scenario_3/
 
 # Data files — keep .npy files tracked (they are small and needed to run)
 # Comment out if you prefer to exclude them

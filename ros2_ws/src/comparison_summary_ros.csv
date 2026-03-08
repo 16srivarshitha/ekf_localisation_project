@@ -1,0 +1,4 @@
+Method,RMSE (m),Improvement vs Odometry (%),Improvement vs rl (%)
+Odometry,0.1303,—,-90.7
+Your Landmark EKF,0.0121,+90.7,+76.4
+robot_localization,0.0513,+60.6,—

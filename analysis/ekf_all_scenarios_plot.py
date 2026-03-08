@@ -1,5 +1,8 @@
+"""
+ekf_all_scenarios_plot.py — Trajectory comparison for all three noise scenarios.
+"""
+
 import os
-import sys
 import numpy as np
 import matplotlib.pyplot as plt
 
@@ -10,38 +13,25 @@ os.makedirs(PLOTS_DIR, exist_ok=True)
 
 from ekf import EKFLocalizer
 
-#  Scenario definitions 
-scenarios = {
-    "scenario_1": {
-        "label": "Scenario 1 (Low Noise)",
-        "M": np.diag([0.005**2, 0.002**2]),
-        "R": np.diag([0.05**2,  0.01**2]),
-    },
-    "scenario_2": {
-        "label": "Scenario 2 (High Noise)",
-        "M": np.diag([0.2**2, 0.1**2]),
-        "R": np.diag([0.5**2, 0.15**2]),
-    },
-    "scenario_3": {
-        "label": "Scenario 3 (Moderate Noise)",
-        "M": np.diag([0.05**2, 0.02**2]),
-        "R": np.diag([0.2**2,  0.05**2]),
-    },
-}
-
 DT = 0.1
 
-for folder, cfg in scenarios.items():
+SCENARIOS = {
+    "scenario_1": {"label": "Scenario 1 (Low Noise)",      "M": np.diag([0.005**2, 0.002**2]), "R": np.diag([0.05**2, 0.01**2])},
+    "scenario_2": {"label": "Scenario 2 (High Noise)",     "M": np.diag([0.2**2,  0.1**2]),   "R": np.diag([0.5**2,  0.15**2])},
+    "scenario_3": {"label": "Scenario 3 (Moderate Noise)", "M": np.diag([0.05**2, 0.02**2]),  "R": np.diag([0.2**2,  0.05**2])},
+}
 
-    print(f"Processing: {folder} — {cfg['label']}")
 
-    #  Load data 
+def normalize_angle(a):
+    return (a + np.pi) % (2 * np.pi) - np.pi
+
+
+for folder, cfg in SCENARIOS.items():
     gt        = np.load(os.path.join(DATA_DIR, folder, "ground_truth.npy"))
     odom      = np.load(os.path.join(DATA_DIR, folder, "odometry.npy"))
     landmarks = np.load(os.path.join(DATA_DIR, folder, "landmarks.npy"))
     obs       = np.load(os.path.join(DATA_DIR, folder, "observations.npy"))
 
-    #  Run EKF 
     ekf = EKFLocalizer(
         initial_state         = np.array([0.0, 0.0, 0.0]),
         initial_covariance    = np.eye(3) * 0.1,
@@ -50,17 +40,13 @@ for folder, cfg in scenarios.items():
     )
 
     ekf_path = [[ekf.mu[0, 0], ekf.mu[1, 0]]]
-
     for i in range(1, len(odom)):
-
-        # Predict
         dx    = odom[i, 0] - odom[i-1, 0]
         dy    = odom[i, 1] - odom[i-1, 1]
         v     = np.sqrt(dx**2 + dy**2) / DT
-        omega = (odom[i, 2] - odom[i-1, 2]) / DT
+        omega = normalize_angle(odom[i, 2] - odom[i-1, 2]) / DT   
         ekf.predict([v, omega], DT)
 
-        # Update with all landmark observations at this step
         for row in obs[obs[:, 0] == i]:
             _, lm_id, r, b = row
             ekf.update([r, b], landmarks[int(lm_id)])
@@ -69,15 +55,10 @@ for folder, cfg in scenarios.items():
 
     ekf_path = np.array(ekf_path)
 
-    #  Plot 
     plt.figure(figsize=(8, 8))
-
-    plt.plot(odom[:, 0], odom[:, 1],
-             linestyle="--", color="red", linewidth=2, label="Noisy Odometry")
-    plt.plot(gt[:, 0], gt[:, 1],
-             color="green", linewidth=3, label="Ground Truth")
-    plt.plot(ekf_path[:, 0], ekf_path[:, 1],
-             color="blue", linewidth=2, label="EKF Estimate")
+    plt.plot(odom[:, 0], odom[:, 1], linestyle="--", color="red",   linewidth=2, label="Noisy Odometry")
+    plt.plot(gt[:, 0],   gt[:, 1],   color="green",                 linewidth=3, label="Ground Truth")
+    plt.plot(ekf_path[:, 0], ekf_path[:, 1], color="blue",          linewidth=2, label="EKF Estimate")
 
     plt.scatter(landmarks[:, 0], landmarks[:, 1],
                 marker="*", s=250, color="blue", edgecolors="black", zorder=5, label="Landmarks")
@@ -98,4 +79,4 @@ for folder, cfg in scenarios.items():
     out = os.path.join(PLOTS_DIR, f"trajectory_{folder}.png")
     plt.savefig(out, dpi=300)
     plt.close()
-    print(f"  Saved: {out}")
+    print(f"Saved: {out}")

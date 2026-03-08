@@ -2,8 +2,15 @@ version: '3.8'
 services:
   ros2_ekf:
     build: .
-    container_name: ekf_dev_container
+    container_name: ekf_localisation_dev_container
     volumes:
       - ./src:/ros2_ws/src
-    command: tail -F /dev/null 
-    network_mode: host       
+      - ./build:/ros2_ws/build
+      - ./install:/ros2_ws/install
+      - ./log:/ros2_ws/log
+      - /tmp/.X11-unix:/tmp/.X11-unix
+    environment:
+      - DISPLAY=${DISPLAY}
+      - QT_X11_NO_MITSHM=1
+    command: tail -F /dev/null
+    network_mode: host
